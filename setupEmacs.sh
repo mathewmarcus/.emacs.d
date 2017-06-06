@@ -11,14 +11,12 @@ GIT_PLUGINS=("$YASNIPPETS")
 
 
 function setup_cc_mode() {
-    tar -xzvf cc-mode*
+    mv cc-mode* cc-mode
+    tar -xzvf cc-mode
     $EMACS -batch -no-site-file -q -f batch-byte-compile cc-*.el
     rm *.el
 }
 
-
-printf 'Cloning .emacs.d directory...\n'
-git clone https://github.com/mathewmarcus/.emacs.d
 
 cd ~/.emacs.d/plugins
 printf 'Downloading external plugins...\n'
