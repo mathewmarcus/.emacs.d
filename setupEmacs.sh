@@ -3,11 +3,12 @@
 EMACS=$(which emacs)
 
 CC_MODE='http://sourceforge.net/projects/cc-mode/files/cc-mode/5.33/cc-mode-5.33.tar.gz/download'
-HOBER_THEME='https://github.com/emacs-jp/replace-colorthemes/blob/master/hober-theme.el'
+HOBER_THEME='https://raw.githubusercontent.com/emacs-jp/replace-colorthemes/master/hober-theme.el'
 YANIPPETS='https://github.com/AndreaCrotti/yasnippet-snippets'
 
 WGET_PLUGINS=("$CC_MODE", "$HOBER_THEME")
 GIT_PLUGINS=("$YASNIPPETS")
+PIP_DEPENDENCIES=('rope', 'flake8', 'importmagic', 'autopep8', 'yapf')
 
 
 function setup_cc_mode() {
@@ -31,4 +32,12 @@ for plugin in ${GIT_PLUGINS[*]}; do
     git clone "$plugin"
 done
 
+
+printf 'Downloading pip dependencies...\n'
+
+for package in ${PIP_DEPENDENCIES[*]}; do
+    pip install -Ur "$package"
+done
+
 setup_cc_mode
+
