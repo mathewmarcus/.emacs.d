@@ -13,8 +13,10 @@ GIT_PLUGINS=("$YASNIPPETS")
 function setup_cc_mode() {
     mv cc-mode* cc-mode
     tar -xzvf cc-mode
+    cd cc-mode
     $EMACS -batch -no-site-file -q -f batch-byte-compile cc-*.el
     rm *.el
+    cd -
 }
 
 
@@ -23,8 +25,10 @@ printf 'Downloading external plugins...\n'
 
 for plugin in ${WGET_PLUGINS[*]}; do
     wget "$plugin"
+done
 
 for plugin in ${GIT_PLUGINS[*]}; do
     git clone "$plugin"
+done
 
 setup_cc_mode
