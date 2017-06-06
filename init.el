@@ -9,11 +9,10 @@
   '(better-defaults
     elpy
     autocomplete-c-headers
-    multi-term ;; TBD
+    multi-term
     magit,
     company-jedi,
-    markdown-mode)) ;; TBD
-;; not in MELPA '(hober, cc-mode)
+    markdown-mode))
 
 
 ;; Prevent startup tutorial screen
