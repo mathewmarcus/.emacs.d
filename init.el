@@ -13,7 +13,8 @@
     neotree
     magit
     company-jedi
-    markdown-mode))
+    markdown-mode
+    ace-window))
 (mapc #'(lambda (package)
     (unless (package-installed-p package)
       (package-install package)))
@@ -54,7 +55,11 @@
 (global-set-key [f8] 'neotree-toggle)
 
 
-;; Shell
+;; Window configuration
+(global-set-key (kbd "M-p") 'ace-window)
+
+
+;; SHELL
 (require 'multi-term)
 
 ;; prevent shell history navigation macro key combos from being mapped to Emacs macros
@@ -62,6 +67,7 @@
 (setq term-bind-key-alist (delete '("C-n" . next-line) term-bind-key-alist))
 (setq term-bind-key-alist (delete '("C-r" . isearch-backward) term-bind-key-alist))
 (add-to-list 'term-bind-key-alist '("C-y" . term-paste))
+
 (defun kill-term-line ()
   (define-key term-raw-map (kbd "C-k")
     (lambda ()
@@ -80,11 +86,16 @@
 
 (add-hook 'term-mode-hook 'my-inhibit-global-linum-mode)
 
+(add-hook 'term-mode-hook
+  (lambda () 
+    (define-key term-raw-map (kbd "M-p") 'ace-window)))
 
 ;; Python
 ;; ------
 (elpy-enable)
-(setq elpy-rpc-python-command "python3")
+
+(when (not (string-equal system-name "mattwork.local"))
+    (setq elpy-rpc-python-command "python3"))
 (setq elpy-rpc-backend "jedi")
 (add-hook 'python-mode-hook
             (lambda ()
@@ -106,7 +117,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (company-jedi markdown-mode ac-c-headers multi-term elpy better-defaults))))
+    (ace-window company-jedi markdown-mode ac-c-headers multi-term elpy better-defaults))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
