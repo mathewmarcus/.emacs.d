@@ -11,7 +11,7 @@ YASNIPPETS='https://github.com/AndreaCrotti/yasnippet-snippets'
 
 WGET_PLUGINS=("$CC_MODE" "$HOBER_THEME")
 GIT_PLUGINS=("$YASNIPPETS")
-PIP_DEPENDENCIES=('rope' 'flake8' 'importmagic' 'autopep8' 'yapf')
+PIP_DEPENDENCIES=('jedi' 'flake8' 'importmagic' 'autopep8' 'yapf')
 
 
 function setup_cc_mode() {
