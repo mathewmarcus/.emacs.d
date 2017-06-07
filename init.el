@@ -10,6 +10,7 @@
     elpy
     ac-c-headers
     multi-term
+    neotree
     magit
     company-jedi
     markdown-mode))
