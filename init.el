@@ -8,11 +8,15 @@
 (defvar myPackages
   '(better-defaults
     elpy
-    autocomplete-c-headers
+    ac-c-headers
     multi-term
-    magit,
-    company-jedi,
+    magit
+    company-jedi
     markdown-mode))
+(mapc #'(lambda (package)
+    (unless (package-installed-p package)
+      (package-install package)))
+      myPackages)
 
 
 ;; Prevent startup tutorial screen
@@ -79,6 +83,7 @@
 ;; Python
 ;; ------
 (elpy-enable)
+(setq elpy-rpc-backend "jedi")
 (add-hook 'python-mode-hook
             (lambda ()
               (set (make-local-variable 'company-backends) '(company-jedi))))
