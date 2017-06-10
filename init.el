@@ -26,6 +26,7 @@
 
 ;; Enable global line numbers
 (global-linum-mode t)
+(setq column-number-mode t)
 
 ;; OSX Meta key fixes
 (when (eq system-type 'darwin)
@@ -85,6 +86,7 @@
             :append :local))
 
 (add-hook 'term-mode-hook 'my-inhibit-global-linum-mode)
+(add-hook 'term-mode-hook (lambda () (setq-local column-number-mode nil)))
 
 (add-hook 'term-mode-hook
   (lambda () 
