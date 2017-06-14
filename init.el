@@ -43,7 +43,7 @@
 (ac-config-default)
 (setq ac-modes (delq 'python-mode ac-modes))
 (add-to-list 'load-path
-              "~/.emacs.d/plugins/yasnippet")
+              "~/.emacs.d/plugins/yasnippet-snippets")
 (require 'yasnippet)
 (yas-global-mode 1)
 (define-key yas-minor-mode-map (kbd "<tab>") nil)
