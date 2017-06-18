@@ -39,6 +39,9 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/plugins")
 (load-theme 'hober t)
 
+;; Auto complete pairs (parentheses, quotes, etc)
+(electric-pair-mode 1)
+
 ;; setup generic autocomplete
 (ac-config-default)
 (setq ac-modes (delq 'python-mode ac-modes))
