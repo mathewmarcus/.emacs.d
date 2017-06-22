@@ -42,6 +42,9 @@
 ;; Auto complete pairs (parentheses, quotes, etc)
 (electric-pair-mode 1)
 
+;; Autoload files
+(auto-revert-mode 1)
+
 ;; setup generic autocomplete
 (ac-config-default)
 (setq ac-modes (delq 'python-mode ac-modes))
