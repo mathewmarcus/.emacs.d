@@ -43,7 +43,7 @@
 (electric-pair-mode 1)
 
 ;; Autoload files
-(auto-revert-mode 1)
+(global-auto-revert-mode t)
 
 ;; setup generic autocomplete
 (ac-config-default)
