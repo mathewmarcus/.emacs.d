@@ -23,6 +23,9 @@
 ;; Prevent startup tutorial screen
 (setq inhibit-startup-screen t)
 
+;; show all available buffer on C-x b
+(ido-mode 1)
+
 ;; Enable global line numbers
 (global-linum-mode t)
 (setq column-number-mode t)
