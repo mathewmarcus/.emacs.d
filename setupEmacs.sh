@@ -10,7 +10,7 @@ HOBER_THEME='https://raw.githubusercontent.com/emacs-jp/replace-colorthemes/mast
 YASNIPPETS='https://github.com/joaotavora/yasnippet'
 # YASNIPPETS='https://github.com/AndreaCrotti/yasnippet-snippets'
 
-WGET_PLUGINS=("$CC_MODE" "$HOBER_THEME")
+WGET_PLUGINS=("$CC_MODE")
 GIT_PLUGINS=("${YASNIPPETS}")
 
 
@@ -39,6 +39,4 @@ for plugin in ${GIT_PLUGINS[*]}; do
     git clone --recursive "$plugin"
 done
 
-
 setup_cc_mode
-

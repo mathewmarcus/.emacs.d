@@ -4,3 +4,4 @@ elpa
 plugins
 hober-theme.el
 ac-comphist.dat
+.python-environments/
