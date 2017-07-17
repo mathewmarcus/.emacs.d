@@ -1,20 +1,19 @@
 ;; Configure packages and package repository
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(add-to-list 'package-archives '("elpy" . "http://jorgenschaefer.github.io/packages/"))
 (package-initialize)
 (when (not package-archive-contents)
   (package-refresh-contents))
 (defvar myPackages
   '(better-defaults
-    elpy
     ac-c-headers
+    jedi
     multi-term
     neotree
     magit
-    company-jedi
     markdown-mode
-    ace-window))
+    ace-window
+    cyberpunk-theme))
 (mapc #'(lambda (package)
     (unless (package-installed-p package)
       (package-install package)))
@@ -36,14 +35,21 @@
   (setq mac-option-modifier nil))
 
 ;; Load custom theme
-(add-to-list 'custom-theme-load-path "~/.emacs.d/plugins")
-(load-theme 'hober t)
+;; (add-to-list 'custom-theme-load-path "~/.emacs.d/plugins")
+;; (load-theme 'hober t)
+(load-theme 'cyberpunk t)
+
+;; Auto complete pairs (parentheses, quotes, etc)
+(electric-pair-mode 1)
+
+;; Autoload files
+(global-auto-revert-mode t)
 
 ;; setup generic autocomplete
 (ac-config-default)
 (setq ac-modes (delq 'python-mode ac-modes))
 (add-to-list 'load-path
-              "~/.emacs.d/plugins/yasnippet-snippets")
+              "~/.emacs.d/plugins/yasnippet")
 (require 'yasnippet)
 (yas-global-mode 1)
 (define-key yas-minor-mode-map (kbd "<tab>") nil)
@@ -94,14 +100,17 @@
 
 ;; Python
 ;; ------
-(elpy-enable)
+;; (jedi:reinstall-server)
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:complete-on-dot t)
+;; (elpy-enable)
 
-(when (not (string-equal system-name "mattwork.local"))
-    (setq elpy-rpc-python-command "python3"))
-(setq elpy-rpc-backend "jedi")
-(add-hook 'python-mode-hook
-            (lambda ()
-              (set (make-local-variable 'company-backends) '(company-jedi))))
+;; (when (not (string-equal system-name "mattwork.local"))
+;;     (setq elpy-rpc-python-command "python3"))
+;; (setq elpy-rpc-backend "jedi")
+;; (add-hook 'python-mode-hook
+;;             (lambda ()
+;;               (set (make-local-variable 'company-backends) '(company-jedi))))
 
 
 ;; C/C++
@@ -122,7 +131,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (ace-window company-jedi markdown-mode ac-c-headers multi-term elpy better-defaults))))
+    (ace-window markdown-mode ac-c-headers multi-term better-defaults))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
