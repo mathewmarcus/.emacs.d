@@ -23,6 +23,9 @@
 ;; Prevent startup tutorial screen
 (setq inhibit-startup-screen t)
 
+;; Hide top menu bar
+(menu-bar-mode -1)
+
 ;; show all available buffer on C-x b
 (ido-mode 1)
 
