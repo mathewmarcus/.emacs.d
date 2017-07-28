@@ -31,12 +31,13 @@ cd ~/.emacs.d/plugins
 printf 'Downloading external plugins...\n'
 
 for plugin in ${WGET_PLUGINS[*]}; do
-    wget "$plugin"
+    wget -q "$plugin"
 done
 
 for plugin in ${GIT_PLUGINS[*]}; do
     echo $plugin
-    git clone --recursive "$plugin"
+    git clone -q --recursive "$plugin"
 done
 
-setup_cc_mode
+printf 'Bytecode compiling cc-mode/*el'
+setup_cc_mode > /dev/null
