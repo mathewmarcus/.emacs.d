@@ -7,20 +7,20 @@ EMACS=$(which emacs)
 
 CC_MODE='http://sourceforge.net/projects/cc-mode/files/cc-mode/5.33/cc-mode-5.33.tar.gz'
 HOBER_THEME='https://raw.githubusercontent.com/emacs-jp/replace-colorthemes/master/hober-theme.el'
-YASNIPPETS='https://github.com/joaotavora/yasnippet'
+YASNIPPETS=('https://github.com/joaotavora/yasnippet' 'https://github.com/gabrielelanaro/emacs-for-python.git')
 # YASNIPPETS='https://github.com/AndreaCrotti/yasnippet-snippets'
 
 WGET_PLUGINS=("$CC_MODE")
-GIT_PLUGINS=("${YASNIPPETS}")
+GIT_PLUGINS=("${YASNIPPETS[*]}")
 
 
 function setup_cc_mode() {
     mv cc-mode* cc-mode    
-    tar -xzvf cc-mode
+    tar -xzf cc-mode
     rm cc-mode
     mv cc-mode* cc-mode    
     cd cc-mode
-    $EMACS -batch -no-site-file -q -f batch-byte-compile cc-*.el
+    ${EMACS} -batch -no-site-file -q -f batch-byte-compile cc-*.el > /dev/null
     rm *.el
     cd -
 }
@@ -35,8 +35,11 @@ for plugin in ${WGET_PLUGINS[*]}; do
 done
 
 for plugin in ${GIT_PLUGINS[*]}; do
-    echo $plugin
-    git clone -q --recursive "$plugin"
+    if [[ "${plugin}" =~ 'joaotavora' ]]; then
+	git clone -q --recursive "$plugin"
+    else
+	git clone -q "$plugin"
+    fi
 done
 
 printf 'Bytecode compiling cc-mode/*el'
