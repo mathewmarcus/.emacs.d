@@ -1,6 +1,9 @@
+
 ;; Configure packages and package repository
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives
+             '("MELPA Stable" . "http://stable.melpa.org/packages/") t)
 (package-initialize)
 (when (not package-archive-contents)
   (package-refresh-contents))
@@ -13,7 +16,8 @@
     magit
     markdown-mode
     ace-window
-    cyberpunk-theme))
+    cyberpunk-theme
+    flycheck))
 (mapc #'(lambda (package)
     (unless (package-installed-p package)
       (package-install package)))
@@ -35,6 +39,9 @@
 
 ;; OSX Meta key fixes
 (when (eq system-type 'darwin)
+  (unless (package-installed-p 'exec-path-from-shell)
+      (package-install 'exec-path-from-shell))
+  (exec-path-from-shell-initialize)
   (setq mac-option-key-is-meta nil)
   (setq mac-command-key-is-meat t)
   (setq mac-command-modifier 'meta)
@@ -111,6 +118,8 @@
 (setq jedi:complete-on-dot t)
 ;; (elpy-enable)
 
+;; Enable linting
+(global-flycheck-mode)
 ;; (when (not (string-equal system-name "mattwork.local"))
 ;;     (setq elpy-rpc-python-command "python3"))
 ;; (setq elpy-rpc-backend "jedi")
