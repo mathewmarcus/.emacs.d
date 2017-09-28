@@ -55,11 +55,8 @@
 ;; Auto complete pairs (parentheses, quotes, etc)
 (electric-pair-mode 1)
 
-;; Autoload files
-(global-auto-revert-mode t)
-
-;; Auto complete pairs (parentheses, quotes, etc)
-(electric-pair-mode 1)
+;; Highlight matching parentheses, braces
+(show-paren-mode 1)
 
 ;; Autoload files
 (global-auto-revert-mode t)
