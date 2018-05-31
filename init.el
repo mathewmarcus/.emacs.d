@@ -32,6 +32,21 @@
 ;; Highlight matching parentheses, braces
 (show-paren-mode 1)
 
+;; setup generic autocomplete
+(ac-config-default)
+(setq ac-modes (delq 'python-mode ac-modes))
+(add-to-list 'load-path
+            "~/.emacs.d/plugins/yasnippet")
+(require 'yasnippet)
+(yas-global-mode 1)
+(define-key yas-minor-mode-map (kbd "<tab>") nil)
+(define-key yas-minor-mode-map (kbd "TAB") nil)
+(define-key yas-minor-mode-map (kbd "C-c e") 'yas-expand)
+;; Add python specific yasnippets
+(setq yas-snippet-dirs (append yas-snippet-dirs
+                               '("~/.emacs.d/plugins/emacs-for-python/extensions/yasnippet/snippets")))
+(yas-reload-all)
+
 ;; Autoload files
 (global-auto-revert-mode t)
 
